@@ -1,0 +1,62 @@
+<div class="search-bar-container">
+
+  <input #searchBar type="text" placeholder="Search by Make or Policy Owner ..." />
+
+  <button class="search-button" (click)="search(searchBar.value, dateSelector.value, dateSelectorMobile.value, 1)">
+    <span class="search-button-text">
+      Search
+    </span>
+    <span class="search-button-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,256,256">
+        <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(8.53333,8.53333)"><path d="M13,3c-5.511,0 -10,4.489 -10,10c0,5.511 4.489,10 10,10c2.39651,0 4.59738,-0.85101 6.32227,-2.26367l5.9707,5.9707c0.25082,0.26124 0.62327,0.36648 0.97371,0.27512c0.35044,-0.09136 0.62411,-0.36503 0.71547,-0.71547c0.09136,-0.35044 -0.01388,-0.72289 -0.27512,-0.97371l-5.9707,-5.9707c1.41266,-1.72488 2.26367,-3.92576 2.26367,-6.32227c0,-5.511 -4.489,-10 -10,-10zM13,5c4.43012,0 8,3.56988 8,8c0,4.43012 -3.56988,8 -8,8c-4.43012,0 -8,-3.56988 -8,-8c0,-4.43012 3.56988,-8 8,-8z"></path></g></g>
+      </svg>
+    </span>
+  </button>
+
+  <div class="date-order-select">
+    <select #dateSelector>
+      <option value="false">Date: Desc</option>
+      <option value="true">Date: Asc</option>
+    </select>
+  </div>
+</div>
+
+<div class="filter-container-mobile">
+  <div class="date-order-select-mobile">
+    <select #dateSelectorMobile>
+      <option value="false">Date: Desc</option>
+      <option value="true">Date: Asc</option>
+    </select>
+  </div>
+</div>
+
+<div *ngIf="!errorFound && quotations.length>0" class="results-container">
+  <p style="margin-left:20px;">Showing {{ ((currentPage-1)*10)+1 }}-{{ currentPage*10>totalCount? totalCount : currentPage*10 }} out of {{ totalCount }} quotations <span *ngIf="query!=''"> . (Keyword: "{{ query }}")</span></p>
+</div>
+
+<div class="quotations-grid-container">
+
+  <div *ngIf="errorFound" class="error-container">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50px" data-name="Layer 1" viewBox="0 0 24 24" id="Error"><path d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm4.242,14.829a1,1,0,0,1,0,1.414,1.026,1.026,0,0,1-1.414,0L12,13.414,9.172,16.243a1.01,1.01,0,0,1-1.414,0,1,1,0,0,1,0-1.414L10.586,12,7.758,9.171A1,1,0,1,1,9.172,7.757L12,10.586l2.828-2.829a1,1,0,1,1,1.414,1.414L13.414,12Z" fill="#ff0000" class="color000000 svgShape"></path></svg>
+    <p *ngIf="errorTitle=='Not Found'">No results for "{{ query }}"</p>
+    <p *ngIf="errorTitle!='Not Found'">An error occured</p>
+  </div>
+
+  <div *ngIf="quotations.length>0" class="quotations-grid">
+
+    <div class="quotation-card" *ngFor="let quotation of quotations">
+      <app-quotation-card [quotation]="quotation"></app-quotation-card>
+    </div>
+
+  </div>
+</div>
+<div *ngIf="!errorFound" class="pages-container">
+  <div *ngFor="let n of numToArray(totalPages); let i = index;" class="page-number-container">
+    <div *ngIf="i+1==currentPage" style="color:#525CEB;">
+      {{i+1}}
+    </div>
+    <div *ngIf="i+1!=currentPage" style="cursor:pointer;" (click)="search(searchBar.value, dateSelector.value, dateSelectorMobile.value, i+1)">
+      {{i+1}}
+    </div>
+  </div>
+</div>

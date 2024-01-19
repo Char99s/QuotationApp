@@ -1,0 +1,67 @@
+.quotation-number-status-draft {
+  background-color: #FFB344;
+  position: absolute;
+  height: 20px;
+  padding: 5px 10px 5px 10px;
+  top: -30px;
+  left: 0;
+  border-radius: 0 15px 0 0;
+  font-size: 11px;
+  color: #F8EDFF;
+  overflow: hidden;
+}
+
+.quotation-number-status-purchased {
+  background-color: #00A19D;
+  position: absolute;
+  height: 20px;
+  padding: 5px 10px 5px 10px;
+  top: -30px;
+  left: 0;
+  border-radius: 0 15px 0 0;
+  font-size: 11px;
+  color: #F8EDFF;
+  overflow: hidden;
+}
+
+.quotation-owner-holder {
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.quotation-date-holder {
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  color: darkgrey;
+}
+
+.quotation-car-make {
+  width: 100%;
+  height: fit-content;
+  padding-left: 20px;
+  font-size: 18px;
+  font-weight: 400;
+  display: flex;
+  justify-content: start;
+}
+
+.quotation-car-year-make {
+  width: 100%;
+  height: fit-content;
+  padding-left: 20px;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 1500px) {
+  .quotation-card {
+    width: 95%;
+  }
+}
